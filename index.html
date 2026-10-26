@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Latoya Pittman · AI training & infrastructure</title>
+<meta name="description" content="Latoya Pittman, founder of Cutline Industries, building Artemis AI: sparse MoE models, GPU training under hard cost caps, and cloud infrastructure.">
+<meta name="theme-color" content="#05070f">
+<meta property="og:title" content="Latoya Pittman · AI training & infrastructure">
+<meta property="og:description" content="Founder of Cutline Industries, building Artemis AI. Shipped, measured work in models, training and infra.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preload" href="fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/jetbrainsmono-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="sky" aria-hidden="true"><div class="stars"></div><div class="stars2"></div><svg class="arcs" viewBox="0 0 1200 700" preserveAspectRatio="xMidYMid slice"><g fill="none" stroke="url(#ag)" stroke-linecap="round"><ellipse cx="900" cy="560" rx="560" ry="150" transform="rotate(-12 900 560)"/><ellipse cx="900" cy="560" rx="420" ry="105" transform="rotate(-12 900 560)" opacity=".7"/><ellipse cx="900" cy="560" rx="700" ry="200" transform="rotate(-12 900 560)" opacity=".4"/></g><defs><linearGradient id="ag" x1="0" x2="1"><stop offset="0" stop-color="#6aa0ff" stop-opacity="0"/><stop offset=".5" stop-color="#6aa0ff" stop-opacity=".8"/><stop offset="1" stop-color="#22d3ee" stop-opacity="0"/></linearGradient></defs></svg></div>
+
+<header class="top">
+  <nav class="wrap nav" aria-label="Primary">
+    <a class="brand" href="#main"><img src="favicon.svg" width="28" height="28" alt=""> <span>Latoya Pittman</span></a>
+    <ul>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#results">Results</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="https://github.com/lpittman-blip">GitHub</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main id="main">
+  <section class="hero wrap" aria-labelledby="hero-title">
+    <p class="eyebrow">Founder · Cutline Industries</p>
+    <h1 id="hero-title">I build AI systems end to end:<br><span class="grad">models, training runs, and the infra around them.</span></h1>
+    <p class="lede">I'm building <a href="https://artemisai-bycutlineindustries.studio">Artemis AI</a>. That means sparse Mixture-of-Experts models that grow themselves, GPU training under hard cost caps, and the cloud infrastructure that runs it all.</p>
+    <p class="cta"><a class="btn primary" href="#work">See the work</a> <a class="btn" href="https://github.com/lpittman-blip">GitHub profile</a></p>
+  </section>
+
+  <section id="work" class="wrap" aria-labelledby="work-title">
+    <h2 id="work-title">Shipped work</h2>
+    <div class="grid">
+      <article class="card">
+        <h3>Artemis 567885: self-expanding sparse MoE</h3>
+        <p>A CPU-first Top-K MoE transformer in PyTorch. The engine adds experts, layers and capacity when training stalls, and a supervisor AST-checks, time-limits and rolls back bad changes.</p>
+        <p class="metric"><b>0.0965 → 0.0260</b> eval loss over 105 supervised cycles; 1 → 12 layers, 87 experts</p>
+        <p><a href="https://github.com/lpittman-blip/artemis-567885">Repository</a></p>
+      </article>
+      <article class="card">
+        <h3>GPU training runs</h3>
+        <p>A 48.8M-parameter dense Artemis LM trained on a rented RTX A6000 (50 min, 374M tokens). It used a staged pretrain followed by assistant-only SFT, with held-out evaluation in bits per byte.</p>
+        <p class="metric"><b>3.293 → 1.191</b> bits/byte on held-out web text · <b>$0.44</b> measured spend</p>
+      </article>
+      <article class="card">
+        <h3>Fine-tuning pipeline with cost guards</h3>
+        <p>QLoRA fine-tunes of a 7B and a 30B model on 2-GPU instances. Each run has a hard dollar cap, a host-side kill timer, an on-instance self-destruct, and teardown verified by instance ID.</p>
+        <p class="metric">Caps <b>$5</b> / <b>$15</b> · real spend <b>$0.53</b> / <b>$1.08</b></p>
+      </article>
+      <article class="card">
+        <h3>Ops dashboard and Ops Terminal on Azure</h3>
+        <p>A password-protected ops dashboard on Azure Container Apps with bcrypt login, signed sessions, a strict CSP, rate limits and Blob-backed daily snapshots. The Ops Terminal is a sandboxed command API for agents with JSON in/out, timeouts, a command policy, secret redaction and an audit log.</p>
+        <p class="metric">Refreshes daily · access is private</p>
+      </article>
+      <article class="card">
+        <h3>Forge: code hosting</h3>
+        <p>A Git hosting platform with the architecture large hosts use. It has a Rails monolith, Go services (gateway, realtime, Git RPC, quorum ref replication), Rust trigram code search and a React UI kit.</p>
+        <p class="metric">Ruby · Go · Rust · TypeScript</p>
+      </article>
+      <article class="card">
+        <h3>Byte-level MoE language model</h3>
+        <p>Tokenizer-free: raw UTF-8 bytes go through causal MoE blocks to a next-byte softmax. It was trained on CPU on Project Gutenberg and evaluated on authors it never saw in training.</p>
+        <p class="metric"><b>1.761</b> bits/byte held-out vs <b>4.581</b> unigram baseline</p>
+      </article>
+    </div>
+  </section>
+
+  <section id="results" class="wrap" aria-labelledby="results-title">
+    <h2 id="results-title">Measured results</h2>
+    <div class="table-wrap">
+    <table>
+      <caption>Every figure comes from a run log. Estimates are never shown as results.</caption>
+      <thead><tr><th scope="col">Experiment</th><th scope="col">Result</th><th scope="col">Setup</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Self-expanding MoE engine</th><td>eval loss 0.0965 → 0.0260</td><td>105 cycles, CPU, rollback tested</td></tr>
+        <tr><th scope="row">Dense LM, GPU run 1</th><td>3.293 → 1.191 bits/byte (web) · 4.036 → 1.374 (Artemis docs)</td><td>48.8M params, 1× RTX A6000, 50 min</td></tr>
+        <tr><th scope="row">Byte-level MoE LM</th><td>1.761 bits/byte vs 4.581 unigram</td><td>5.4M params, 900 s, 8 CPU threads</td></tr>
+        <tr><th scope="row">Physics sandbox, noisy routing</th><td>rel. L2 0.0077 vs 0.2497 baseline</td><td>SIREN-MoE PINN, 4/4 experts used</td></tr>
+        <tr><th scope="row">Loop vs vectorized dispatch</th><td>1.99–2.97× faster at E=64, d=64</td><td>18 parity-gated configs, 8 threads</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </section>
+
+  <section id="about" class="wrap about" aria-labelledby="about-title">
+    <h2 id="about-title">About · what I'm looking for</h2>
+    <p>I'm the founder of Cutline Industries. I work across the stack, from router math and training loops to rented-GPU orchestration, cloud deployment, DNS and auth. I measure first, label estimates, keep negative results, and give every GPU run a price cap, a time limit and a verified teardown.</p>
+    <p><b>Looking for:</b> roles on AI training and infrastructure teams. That means model and training-systems work, GPU and cluster efficiency, and the tooling that keeps large runs safe, fast and cheap.</p>
+    <p class="stack" aria-label="Tech stack"><span>Python</span><span>PyTorch</span><span>CUDA</span><span>QLoRA / PEFT</span><span>Node.js</span><span>TypeScript</span><span>React</span><span>Go</span><span>Rust</span><span>Rails</span><span>Azure Container Apps</span><span>Docker</span><span>Linux</span></p>
+  </section>
+</main>
+
+<footer class="wrap foot">
+  <p><a href="https://github.com/lpittman-blip">github.com/lpittman-blip</a> · <a href="https://artemisai-bycutlineindustries.studio">artemisai-bycutlineindustries.studio</a></p>
+  <p class="muted">© 2026 Latoya Pittman · Cutline Industries</p>
+</footer>
+</body>
+</html>
