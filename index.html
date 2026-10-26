@@ -43,7 +43,7 @@
       <article class="card">
         <h3>Artemis 567885: self-expanding sparse MoE</h3>
         <p>A CPU-first Top-K MoE transformer in PyTorch. The engine adds experts, layers and capacity when training stalls, and a supervisor AST-checks, time-limits and rolls back bad changes.</p>
-        <p class="metric"><b>0.0965 → 0.0260</b> eval loss over 105 supervised cycles; 1 → 12 layers, 87 experts</p>
+        <p class="metric"><b>0.0965 → 0.0259</b> eval loss over 115 supervised cycles; 1 → 12 layers, 93 experts</p>
         <p><a href="https://github.com/Cutline-industries/artemis-567885">Repository</a></p>
       </article>
       <article class="card">
@@ -81,9 +81,10 @@
       <caption>Every figure comes from a run log. Estimates are never shown as results.</caption>
       <thead><tr><th scope="col">Experiment</th><th scope="col">Result</th><th scope="col">Setup</th></tr></thead>
       <tbody>
-        <tr><th scope="row">Self-expanding MoE engine</th><td>eval loss 0.0965 → 0.0260</td><td>105 cycles, CPU, rollback tested</td></tr>
+        <tr><th scope="row">Self-expanding MoE engine</th><td>eval loss 0.0965 → 0.0259</td><td>115 cycles, rollback tested</td></tr>
         <tr><th scope="row">Dense LM, GPU run 1</th><td>3.293 → 1.191 bits/byte (web) · 4.036 → 1.374 (Artemis docs)</td><td>48.8M params, 1× RTX A6000, 50 min</td></tr>
         <tr><th scope="row">Byte-level MoE LM</th><td>1.761 bits/byte vs 4.581 unigram</td><td>5.4M params, 900 s, 8 CPU threads</td></tr>
+        <tr><th scope="row">Byte-level language field</th><td>1.662 bits/byte held-out vs 4.619 unigram · 2.075 without position</td><td>733K params, 1× RTX 4070, 41 s, $0.03</td></tr>
         <tr><th scope="row">Physics sandbox, noisy routing</th><td>rel. L2 0.0077 vs 0.2497 baseline</td><td>SIREN-MoE PINN, 4/4 experts used</td></tr>
         <tr><th scope="row">Loop vs vectorized dispatch</th><td>1.99–2.97× faster at E=64, d=64</td><td>18 parity-gated configs, 8 threads</td></tr>
       </tbody>
